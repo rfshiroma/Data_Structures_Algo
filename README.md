@@ -1,6 +1,18 @@
-# Demo
+# Maps, Hash Tables, and Skip Lists
 
 Some description.
+
+## Maps and Dictionaries
+Dictionary: It represents an abstraction in which unique keys are mapped to associated values.
+
+Examples and applications of maps:
+  - A university's information system relies on some form of student ID as a key that is mapped to that student's associated record (such as the student's name, address, and course grades) serving as the value.
+  - The domain-name system (DNS) maps a host name, such as www.wiley.com, to an Internet-Protocol (IP) address, such as 208.215.179.146.
+  - A social media site typically relies on a (nonnumeric) username as a key that can be efficiently mapped to a particular user’s associated information.
+  - A computer graphics system may map a color name, such as turquoise , to the triple of numbers that describes the color’s RGB (red-green-blue) representation, such as (64,224,208).
+  - Python uses a dictionary to represent each namespace, mapping an identifying string, such as 'pi', to an associated object, such as 3.14159.
+
+Maps may be implemented so that a search for a key, and its associated value, can be performed very efficiently, therefore supporting fast lookup in such applications. 
 
 ## Python Hash Table Implementation
 
