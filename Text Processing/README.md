@@ -8,4 +8,5 @@ The main idea of the Boyer-Moore algorithm is to improve the running time of the
 The efficiency of the Boyer-Moore algorithm relies on creat- ing a lookup table that quickly determines where a mismatched character occurs elsewhere in the pattern.
 
 ## The Knuth-Morris-Pratt Algo
-The KMP Algo performs pattern matching on a text string of length n and a pattern string of length m in O(n + m) time. 
+The KMP Algo performs pattern matching on a text string of length n and a pattern string of length m in O(n + m) time.
+  - Explained (https://www.youtube.com/watch?v=GTJr8OvyEVQ)
