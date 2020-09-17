@@ -8,4 +8,4 @@
 
 ## DNA and Text Sequence Alignment
 * Applying Dynamic Programming to the LCS Problem
-  - [Explained]()
+  - [Explained](https://www.youtube.com/watch?v=NnD96abizww&t=94s)
