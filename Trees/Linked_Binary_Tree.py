@@ -87,22 +87,77 @@ class LinkedBinaryTree(BinaryTree):
         '''
         if self._root is not None: raise ValueError('Root exists')
         self._size = 1
-        self._root = self.Node(e)
+        self._root = self._Node(e)
         return self._make_position(self._root)
 
     def _add_left(self, p, e):
-        pass
+        '''Create a new left child for Position p, storing element e.
+
+        Return the Position of new node.
+        Raise ValueError if Position p is invalid or p already has a left child.
+        '''
+        node = self._validate(p)
+        if node._left is not None: raise ValueError('Left child already exists')
+        self._size += 1
+        node._left = self._Node(e, node)                # node is its parent
+        return self._make_position(node._left)
 
     def _add_right(self, p, e):
-        pass
+        '''Create a new right child for Position p, storing element e.
+
+        Return the Position of new node.
+        Raise ValueError if Position p is invalid or p already has a right child.
+        '''
+        node = self._validate(p)
+        if node._right is not None: raise ValueError('Right child already exists')
+        self._size += 1
+        node._right = self._Node(e, node)               # node is its parent
+        return self._make_position(node._right)
 
     def _replace(self, p, e):
-        pass
+        '''Replace the element at position p with e, and return old element.'''
+        node = self._validate(p)
+        old = node._element
+        node._element = e
+        return old
 
     def _delete(self, p):
-        pass
+        '''Delete the node at Position p, and replace it with its child, if any.
+
+        Return the element that had been stored at Position p.
+        Raise ValueError if Position p is invalid or p has two children.
+        '''
+        node = self._validate(p)
+        if self.num_children(p) == 2: raise ValueError('p has two children')
+        child = node._left if node._left else node._right       # might be None
+        if child is not None:
+            child._parent = node._parent
+        if node is self._root:                                  # child becomes root
+            self._root = child
+        else:
+            parent = node._parent
+            if node is parent._left:
+                parent._left = child
+            else:
+                parent._right = child
+        self._size -= 1
+        node._parent = node                                 # convention for deprecated node
+        return node._element
 
     def _attach(self, p, t1, t2):
-        pass
-
-    def
+        '''Attach trees t1 and t2 as left and right subtrees of external p.'''
+        node = self._validate(p)
+        if not self.is_leaf(p): raise ValueError('position must be leaf')
+        if not type(self) is type(t1) is type(t2):          # all 3 trees must be same type
+            raise TypeError('Tree types must match')
+        self._size += len(t1) + len(t2)
+        if not t1.is_empty():               # attached t1 as left subtree of node
+            t1._root._parent = node
+            node._left = t1._root
+            t1._root = None                 # set t1 instance to empty
+            t1._size = 0
+        if not t2.is_empty():               # attached t2 as right subtree of node
+            t2._root._parent = node
+            node._right = t2._root
+            t2._root = None                 # set t1 instance to empty
+            t2._size = 0
