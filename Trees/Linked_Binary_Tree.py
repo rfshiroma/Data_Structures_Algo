@@ -131,7 +131,7 @@ class LinkedBinaryTree(BinaryTree):
         if self.num_children(p) == 2: raise ValueError('p has two children')
         child = node._left if node._left else node._right       # might be None
         if child is not None:
-            child._parent = node._parent
+            child._parent = node._parent                # child's grandparent becomes parent
         if node is self._root:                                  # child becomes root
             self._root = child
         else:
