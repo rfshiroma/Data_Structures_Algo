@@ -1,8 +1,10 @@
 # python3
 
-import graph_ADT
+from graph_ADT import incident_edges
+from graph_ADT import opposite
 
 '''Python implementation of a basic Depth-First Search (DFS) algorithm.'''
+
 def DFS(g, u, discovered):
     '''Perform DFS of the undiscovered portion of Graph g starting at Vertex u.
 
