@@ -1,5 +1,7 @@
 # python3
 
+#TODO: remove_vertex(self, ) and remove_edge(self, )
+
 '''Python implementation of a Graph ADT which supports directed or undirected graphs.'''
 # Usage of adjacency map representation
 
@@ -30,7 +32,7 @@ class Edge:
         '''Do not call constructor directly. Use Graph's insert_edge(u,v,x).'''
         self._origin = u
         self._destination = v
-        self._element = x
+        self._element = x  # or weight
 
     def endpoints(self):
         '''Return (u,v) tuple for vertices u and v.'''
@@ -119,12 +121,14 @@ class Graph:
 
     def insert_edge(self, u, v, x=None):
         '''Insert and return a new Edge from u to v with auxiliary element x.'''
-        e = self.Edge(u, v, x)
+        e = self.Edge(u, v, x)  # (start, end, weight)
         self._outgoing[u][v] = e
         self._incoming[v][u] = e
 
-    def remove_vertex(self, ):
+    def remove_vertex(self, ): #TODO
+        '''Remove vertex v and all its incident edges from the graph.'''
         pass
 
-    def remove_edge(self, ):
+    def remove_edge(self, ): #TODO
+        '''Remove edge e from the graph.'''
         pass

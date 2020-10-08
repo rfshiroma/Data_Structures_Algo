@@ -1,5 +1,7 @@
 # python3
 
+# Python implementation of Dijkstra's algorithm for computing the shortest-path distances from a single source. We assume that e.element() for edge e represents the weight of that edge
+
 def shortest_path_length(g, src):
     '''Compute shortest-path distance from src to reachable vertices of g.
 
@@ -35,3 +37,10 @@ def shortest_path_length(g, src):
                     pq.update(pqlocator[v], d[v], v)    # update the pq entry
 
     return cloud                            # only includes reachable vertices
+
+
+# The collection of all shortest paths arised from source s can be compactly represented by what is know as the shortest-path-tree
+def shortest_path_tree(g, s, d):
+    '''Reconstruct shortest-path tree rooted at vertex s, given distance map d.
+
+    Return tree as a map from each reachable vertex v (other than s) to the edge e=(u,v) that is used to reach v from its parent u in the tree.''' 
