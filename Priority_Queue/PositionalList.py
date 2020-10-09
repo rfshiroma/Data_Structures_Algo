@@ -30,7 +30,14 @@ class PositionalList(_DoublyLinkedBase):
 
     # ---------------- utility method ----------------
     def _validate(self, p):
-        pass
+        '''Return position's node, or raise appropriate error if invalid.'''
+        if not isinstance(p, self.Position):
+            raise TypeError('p must be proper Position type.')
+        if p._container is not self:
+            raise ValueError('p does not belong to this container.')
+        if p._node._next is None:               # convention for deprecated nodes
+            raise ValueError('p is no longer valid')
+        return p._node
 
     def _make_position(self, node):
         '''Return Position instance for given node (or None if sentinel).'''
@@ -41,19 +48,29 @@ class PositionalList(_DoublyLinkedBase):
 
     # ---------------- accessor methods ----------------
     def first(self):
-        pass
+        '''Return the first Position in the list (or None if list is empty).'''
+        return self._make_position(self._header._next)
 
     def last(self):
-        pass
+        '''Return the last Position in the list (or None if list is empty).'''
+        return self._make_position(self._trailer._prev)
 
     def before(self, p):
-        pass
+        '''Return the Position just before Position p (or None if p is first).'''
+        node = self._validate(p)
+        return self._make_position(node._prev)
 
     def after(self, p):
-        pass
+        '''Return the Position just after Position p (or None if p is last).'''
+        node = self._validate(p)
+        return self._make_position(node._next)
 
     def __iter__(self):
-        pass
+        '''Generate a forward iteration of the elements of the list.'''
+        cursor = self.first()
+        while cursor is not None:
+            yield cursor.element()
+            cursor = self.after(cursor)         # advance to the next position (if any)
 
     # ---------------- mutators ----------------
     # override inherited version to return Position, rather than Node
