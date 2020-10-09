@@ -7,11 +7,11 @@ from PriorityQueueBase import PriorityQueueBase
 
 
 # base class defines _Item
- class UsortedPriorityQueue(PriorityQueueBase):
-     '''A min-oriented priority queue implemented with an unsorted list.'''
+class UnsortedPriorityQueue(PriorityQueueBase):
+    '''A min-oriented priority queue implemented with an unsorted list.'''
 
-    # nonpublic utility
-     def _find_min(self):
+
+    def _find_min(self):  # nonpublic utility
         '''Returns Position of item with minimum key.'''
         if self.is_empty():        # is_empty inherited from base case
             raise Empty('Priority queue is empty')

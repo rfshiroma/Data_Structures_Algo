@@ -1,6 +1,7 @@
+# python3
+
 '''Implementation of a Priority Queue'''
 
-# python3
 
 # How to implement a priority queue by storing its entries in a positional list L. (see Section 7.4.) We provide two realizations, depending on whether or not we keep the entries in L sorted by key.
 
