@@ -12,25 +12,34 @@ class PositionalList(_DoublyLinkedBase):
         '''An abstract representing the location of a single element.'''
 
         def __init__(self, container, node):
-            pass
+            '''Constructor should not be invoked by user.'''
+            self._container = container
+            self._node = node
 
         def element(self):
-            pass
+            '''Return the element stored at this Position.'''
+            return self._node._element
 
         def __eq__(self, other):
-            pass
+            '''Return True if other is a Position representing the same location.'''
+            return type(other) is type(self) and other._node is self._node
 
         def __ne__(self, other):
-            pass
+            '''Return True if other does not represent the same location.'''
+            return not (self == other)          # opposite of __eq__
 
     # ---------------- utility method ----------------
     def _validate(self, p):
         pass
 
     def _make_position(self, node):
-        pass
+        '''Return Position instance for given node (or None if sentinel).'''
+        if node is self._header or node is self._trailer:
+            return None                                 # boundary violation
+        else:
+            return self.Position(self, node)            # legitimate position
 
-    # ---------------- accessors ----------------
+    # ---------------- accessor methods ----------------
     def first(self):
         pass
 
@@ -49,22 +58,39 @@ class PositionalList(_DoublyLinkedBase):
     # ---------------- mutators ----------------
     # override inherited version to return Position, rather than Node
     def _insert_between(self, e, predecessor, successor):
-        pass
+        '''Add element between existing nodes and return new Position.'''
+        node = super()._insert_between(e, predecessor, successor)
+        return self._make_position(node)
 
     def add_first(self, e):
-        pass
+        '''Insert element e at the front of the list and return new Position.'''
+        return self._insert_between(e, self._header, self._header._next)
 
     def add_last(self, e):
-        pass
+        '''Insert element e at the back of the list and return new Position.'''
+        return self._insert_between(e, self._trailer._prev, self._trailer)
 
     def add_before(self, p, e):
-        pass
+        '''Insert element e into list before Position p and return new Position.'''
+        original = self._validate(p)
+        return self._insert_between(e, original._prev, original)
 
     def add_after(self, p, e):
-        pass
+        '''Insert element e into list after Position p and return new Position.'''
+        original = self._validate(p)
+        return self._insert_between(e, original, original._next)
 
     def delete(self, p):
-        pass
+        '''Remove and return the element at Position p.'''
+        original = self._validate(p)
+        return self._delete_node(original)  # inherited method returns element
 
     def replace(self, p, e):
-        pass
+        '''Replace the element at Position p with e.
+
+        Return the element formely at Position p.
+        '''
+        original = self._validate(p)
+        old_value = original._element           # temporarily store old element
+        original._element = e                   # replace with new element
+        return old_value                        # return the old element value
