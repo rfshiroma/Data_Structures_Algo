@@ -2,6 +2,8 @@
 from graph_ADT import vertices, degree, incident_edges, opposite
 
 '''Implementation for the topological sorting algorithm.'''
+# g has a topological ordering if and only if it is acyclic;
+
 
 def topological_sort(g):
     '''Return a list of vertices of directed acyclic graph g (DAG) in topological order.
@@ -24,3 +26,10 @@ def topological_sort(g):
             if incount[v] == 0:
                 ready.append(v)
     return topo
+
+
+'''Directed Acyclic Graphs (DAG)'''
+# Applications of such graphs include:
+ # 1. Prerequesites between courses of a degree program;
+ # 2. Inheritance between classes of an object-oriented program;
+ # 3. Scheduling constraints between the tasks of a project.

@@ -8,7 +8,7 @@ from graph_ADT import opposite
 def DFS(g, u, discovered):
     '''Perform DFS of the undiscovered portion of Graph g starting at Vertex u.
 
-    discovered: is a dictionary mapping each vertex to the edge that was used to discover it during the DFS. (u should be "discovered" prior to tha call.)
+    discovered: is a dictionary mapping each vertex to the edge that was used to discover it during the DFS. (u should be "discovered" prior to that call.)
     Newly discovered vertices will be added to the dictionary as a result.
     '''
     for e in g.incident_edges(u):       # for every outgoing edge from u
