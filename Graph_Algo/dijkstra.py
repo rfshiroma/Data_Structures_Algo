@@ -42,8 +42,17 @@ def shortest_path_length(g, src):
     return cloud                            # only includes reachable vertices
 
 
-# The collection of all shortest paths arised from source s can be compactly represented by what is know as the shortest-path-tree
-def shortest_path_tree(g, s, d):
-    '''Reconstruct shortest-path tree rooted at vertex s, given distance map d.
+# The collection of all shortest paths arised from source src can be compactly represented by what is know as the shortest-path-tree
+def shortest_path_tree(g, src, d):
+    '''Reconstruct shortest-path tree rooted at vertex src, given distance map d.
 
-    Return tree as a map from each reachable vertex v (other than s) to the edge e=(u,v) that is used to reach v from its parent u in the tree.'''
+    Return tree as a map from each reachable vertex v (other than src) to the edge e=(u,v) that is used to reach v from its parent u in the tree.'''
+    tree = {}
+    for v in d:
+        if v is not src:
+            for e in g.incident_edges(v, False):    # consider INCOMING edges
+                u = e.opposite(v)
+                wgt = e.element()
+                if d[v] == d[u] + wgt:
+                    tree[v] = e                     # edge e is used to reach v
+    return tree
