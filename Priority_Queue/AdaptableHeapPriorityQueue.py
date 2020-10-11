@@ -52,7 +52,7 @@ class AdaptableHeapPriorityQueue(HeapPriorityQueue):
         if j == len(self) - 1:              # item at last position
             self._data.pop()                # just remove it
         else:
-            self._swap(j, len(self) - 1)
-            self._data.pop()
-            self._bubble(j)
+            self._swap(j, len(self) - 1)    # swap item to the last position
+            self._data.pop()                # remove it from the list
+            self._bubble(j)                 # fix item displayed by the swap
         return (loc._key, loc._value)
